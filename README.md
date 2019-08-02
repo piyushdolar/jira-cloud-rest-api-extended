@@ -40,3 +40,5 @@ jira.getCurrentUser(result[0].url).then(function(result) {
 	console.log(result);
 }).catch(function(e) { console.log(e); })
 ```
+
+__fell free to drop your comment will update code if required.

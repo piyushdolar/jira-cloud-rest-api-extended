@@ -1,77 +1,42 @@
-![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/github/forks/pandao/editor.md.svg) ![](https://img.shields.io/github/tag/pandao/editor.md.svg) ![](https://img.shields.io/github/release/pandao/editor.md.svg) ![](https://img.shields.io/github/issues/pandao/editor.md.svg) ![](https://img.shields.io/bower/v/editor.md.svg)
-
 ### Features
 
 - Support Standard JavaScript format.
 - Library built in Core JavaScript no need use JQuery.
 - Easy function formating to get requested REST API data.
 
-###Blockquotes
+###Requirements
+- Your jira app with configured with your server.
+- Setup refresh token API in your server.
+- token of logged in user.
+- refresh token of logged in user.
 
-> Blockquotes
+####Initialize function
 
-Paragraphs and Line Breaks
-                    
-> "Blockquotes Blockquotes", [Link](http://localhost/)。
+`var jira = new jiraExtend(token, refreshToken, refreshTokenLink);`
 
-###Code Blocks (multi-language) & highlighting
+####Usage
 
-####Inline code
-
-`$ npm install marked`
-
-####Code Blocks (Indented style)
-
-Indented 4 spaces, like `<pre>` (Preformatted Text).
-
-    <?php
-        echo "Hello world!";
-    ?>
-    
-Code Blocks (Preformatted text):
-
-    | First Header  | Second Header |
-    | ------------- | ------------- |
-    | Content Cell  | Content Cell  |
-    | Content Cell  | Content Cell  |
+Below is list of function help to usage of your Jira Cloud Rest API
 
 ####Javascript　
 
 ```javascript
-function test(){
-	console.log("Hello world!");
-}
- 
-(function(){
-    var box = function(){
-        return box.fn.init();
-    };
+// To get new refresh tokne from library
+jira.getNewToken().then(function(result) {		  
+	console.log(result);
+}).catch(function(e) {
+	console.log(e);
+});
+		
+// To get logged in user Jira App detail name and link
+jira.init().then(function(result) {
+	console.log(result);
+}).catch(function(e) { 
+	console.log(e); 
+});
 
-    box.prototype = box.fn = {
-        init : function(){
-            console.log('box.init()');
-
-			return this;
-        },
-
-		add : function(str){
-			alert("add", str);
-
-			return this;
-		},
-
-		remove : function(str){
-			alert("remove", str);
-
-			return this;
-		}
-    };
-    
-    box.fn.init.prototype = box.fn;
-    
-    window.box =box;
-})();
-
-var testBox = box();
-testBox.add("jQuery").remove("jQuery");
+// To get detail of current logged in user 
+jira.getCurrentUser(result[0].url).then(function(result) {		  
+	console.log(result);
+}).catch(function(e) { console.log(e); })
 ```
